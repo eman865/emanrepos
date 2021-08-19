@@ -38,15 +38,18 @@ public class FindBookDetailsIntentHandler implements RequestHandler{
             System.out.println(bookName);
             System.out.println(exampleMap);
             String author = exampleMap.get(bookName);
-            speechText = String.format(speechTextBookName,bookName, author);
+            if(author == null ){speechText = "Author not found";}
+            else {
+            speechText = String.format(speechTextBookName,bookName, author);}
 
         } else {
             String author = slots.get("AUTHOR").getValue().toLowerCase();
             System.out.println(author);
             System.out.println(exampleMap);
             String bookName = exampleMap.get(author);
-            speechText = String.format(speechTextAuthor,bookName,author);
-
+            if(bookName == null ){speechText = "Book not found";}
+            else {
+                speechText = String.format(speechTextAuthor,bookName, author);}
         }
         return input.getResponseBuilder()
                 .withSpeech(speechText)
