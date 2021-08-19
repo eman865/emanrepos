@@ -20,7 +20,9 @@ public class Hello extends SkillStreamHandler {
                         new HelpIntentHandler(),
                         new LaunchRequestHandler(),
                         new SessionEndedRequestHandler(),
-                        new FallbackIntentHandler())
+                        new FallbackIntentHandler(),
+                        new FindBookDetailsIntentHandler())
+
                 .withAutoCreateTable(true)
                 .withTableName("HsInternSessionStorage")
                 // Add your skill id below if you want? Not sure why.

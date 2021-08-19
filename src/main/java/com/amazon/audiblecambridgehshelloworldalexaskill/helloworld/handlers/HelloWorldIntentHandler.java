@@ -17,12 +17,12 @@ import java.util.Optional;
 import static com.amazon.ask.request.Predicates.intentName;
 
 /**
- * Handles HelloWorldIntent
+ * Handles HelloWorldIntSent
  */
 public class HelloWorldIntentHandler implements RequestHandler {
 
-    private final String speechTextWithCity = "<speak> The weather in %s is nice </speak>";
-    private final String speechTextNoCityName = "No city given";
+    private final String speechTextWithCity = "<speak> The weather in %s is gloomy today </speak>";
+    private final String speechTextNoCityName = "Please include a city in your statement ";
 
     /**
      * Determine if this handler can handle the intent (but doesn't actually handle it)
@@ -47,7 +47,7 @@ public class HelloWorldIntentHandler implements RequestHandler {
      */
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        log(input, "Starting request");
+        log(input, "Request Loading...");
         logSlots(input);
 
         Map<String, Slot> slots = getSlots(input);
