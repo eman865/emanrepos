@@ -22,11 +22,14 @@ public class FindBookDetailsIntentHandler implements RequestHandler{
 
         // add some entries to the map
         exampleMap.put("it", "Stephen King"); // add mapping from "key1" to "value1"
-        exampleMap.put("hunger games", "Suzanne Collins"); // add mapping from "key2" to "value2"
+        exampleMap.put("hunger games", "Suzanne Collins");// add mapping from "key2" to "value2"
+        exampleMap.put("suzanne collins", "Hunger Games");
+        exampleMap.put("stephen king", "IT");
 
 
         Map<String, Slot> slots = getSlots(input);
         String speechTextBookName = "The author of %s is %s";
+        String speechTextAuthor = "I found a book called %s by %s";
         String speechText;
 
         // if we're given a city name
@@ -38,7 +41,12 @@ public class FindBookDetailsIntentHandler implements RequestHandler{
             speechText = String.format(speechTextBookName,bookName, author);
 
         } else {
-            speechText = speechTextBookName;
+            String author = slots.get("AUTHOR").getValue().toLowerCase();
+            System.out.println(author);
+            System.out.println(exampleMap);
+            String bookName = exampleMap.get(author);
+            speechText = String.format(speechTextAuthor,bookName,author);
+
         }
         return input.getResponseBuilder()
                 .withSpeech(speechText)
