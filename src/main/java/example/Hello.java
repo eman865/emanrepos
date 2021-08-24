@@ -21,9 +21,9 @@ public class Hello extends SkillStreamHandler {
                         new LaunchRequestHandler(),
                         new SessionEndedRequestHandler(),
                         new FallbackIntentHandler(),
-                        new FindBookDetailsIntentHandler())
+                        new FindBookDetailsIntentHandler(),
+                        new ReadingListIntentHandler())
 
-                .withAutoCreateTable(true)
                 .withTableName("HsInternSessionStorage")
                 // Add your skill id below if you want? Not sure why.
                 //.withSkillId("")
