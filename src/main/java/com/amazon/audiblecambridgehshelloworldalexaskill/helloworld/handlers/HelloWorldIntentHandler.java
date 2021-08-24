@@ -29,7 +29,7 @@ public class HelloWorldIntentHandler implements RequestHandler {
      *
      * This is called by the ASK framework.
      *
-     * @param input
+     * @param
      * @return
      */
     @Override

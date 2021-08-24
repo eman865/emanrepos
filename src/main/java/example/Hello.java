@@ -24,7 +24,7 @@ public class Hello extends SkillStreamHandler {
                         new FindBookDetailsIntentHandler())
 
                 .withAutoCreateTable(true)
-                .withTableName("HsInternSessionStorage")
+                .withTableName("ReadingLists")
                 // Add your skill id below if you want? Not sure why.
                 //.withSkillId("")
                 .build();
