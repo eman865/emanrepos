@@ -2,7 +2,7 @@ package com.amazon.audiblecambridgehshelloworldalexaskill.helloworld.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import database.AlexaSessionDynamoDBHandler;
+
 import java.util.*;
 
 import static com.amazon.ask.request.Predicates.intentName;
@@ -25,39 +25,32 @@ public class FindBookDetailsIntentHandler implements RequestHandler{
         exampleMap.put("hunger games", "Suzanne Collins");// add mapping from "key2" to "value2"
         exampleMap.put("suzanne collins", "Hunger Games");
         exampleMap.put("stephen king", "IT");
-        exampleMap.put("the odessy", "Homer");
-        exampleMap.put("homer", "The Odessy");
-        exampleMap.put("coraline","Neil Gaiman");
-        exampleMap.put("neil gaiman", "Coraline");
 
 
         Map<String, Slot> slots = getSlots(input);
         String speechTextBookName = "The author of %s is %s";
         String speechTextAuthor = "I found a book called %s by %s";
         String speechText;
-        String bookName;
-        String author;
 
         // if we're given a city name
         if(slots.containsKey("BOOK_NAME") && null != slots.get("BOOK_NAME").getValue()) {
-            bookName = slots.get("BOOK_NAME").getValue().toLowerCase();
+            String bookName = slots.get("BOOK_NAME").getValue().toLowerCase();
             System.out.println(bookName);
             System.out.println(exampleMap);
-            author = exampleMap.get(bookName);
+            String author = exampleMap.get(bookName);
             if(author == null ){speechText = "Author not found";}
             else {
             speechText = String.format(speechTextBookName,bookName, author);}
 
         } else {
-            author = slots.get("AUTHOR").getValue().toLowerCase();
+            String author = slots.get("AUTHOR").getValue().toLowerCase();
             System.out.println(author);
             System.out.println(exampleMap);
-            bookName = exampleMap.get(author);
+            String bookName = exampleMap.get(author);
             if(bookName == null ){speechText = "Book not found";}
             else {
                 speechText = String.format(speechTextAuthor,bookName, author);}
         }
-        AlexaSessionDynamoDBHandler.saveSessionAttributes(input, bookName, author );
         return input.getResponseBuilder()
                 .withSpeech(speechText)
                 .withSimpleCard("Book Details", speechText)
